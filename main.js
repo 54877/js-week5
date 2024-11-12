@@ -70,17 +70,6 @@ function dataInit() {
     })
 }
 
-//地區篩選器
-regionSearch.addEventListener("change",event=>{
-    const ticketCards = document.querySelectorAll(".ticketCard"),
-          selectRegion = event.target.value
-    ticketCards.forEach((iteam)=>{
-        const region = iteam.querySelector(".ticketCard-region").innerHTML
-        iteam.style.display = (selectRegion == "" || selectRegion == region) ? "block" : "none"
-    })
-})
-
-
 //新增資料
 addTicketForm.addEventListener("submit", event=>{   
     event.preventDefault();
@@ -101,5 +90,17 @@ addTicketForm.addEventListener("submit", event=>{
     dataInit()
     addTicketForm.reset()
 })
+
+//地區篩選器
+regionSearch.addEventListener("change",event=>{
+    const ticketCards = document.querySelectorAll(".ticketCard"),
+          selectRegion = event.target.value
+    ticketCards.forEach((iteam)=>{
+        const region = iteam.querySelector(".ticketCard-region").innerHTML
+        iteam.style.display = (selectRegion == "" || selectRegion == region) ? "block" : "none"
+    })
+})
+
+
 
 
