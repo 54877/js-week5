@@ -35,6 +35,7 @@ axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelAp
     .then(response => {
       data = response.data.data
       searchResultText.querySelector("span").innerHTML = data.length
+      dataInit();
     })
     .catch(error => {
         console.error('Error fetching data:', error);
@@ -44,6 +45,7 @@ const regionSearch = document.querySelector(".regionSearch"),
       ticketCardArea = document.querySelector(".ticketCard-area"),
       addTicketForm = document.querySelector(".addTicket-form"),
       searchResultText = document.querySelector("#searchResult-text")
+let   dataChart 
          
 //data init
 function dataInit() {
@@ -78,6 +80,8 @@ function dataInit() {
           </div>
         </li>`
     })
+    dataChart = data
+    dountChart(dataChart)
 }
 
 //新增資料
@@ -96,7 +100,6 @@ addTicketForm.addEventListener("submit", event => {
         alert("未填寫完成")
         return
     }
-    console.log(data)
     data.push(obj)
     searchResultText.querySelector("span").innerHTML = data.length
     dataInit()
@@ -121,5 +124,51 @@ regionSearch.addEventListener("change", event => {
 })
 
 
+//新增圖表
+function dountChart(dataChart){
+    
+    // let arr = []
+    // dataChart.forEach((iteam)=>{
+    //     let x = 1
+    //     for(let i=0 ; i<arr.length ; i++){
+    //         if(arr[i][0]==iteam.area){
+    //             arr[i][1]+=1
+    //             x = 0
+    //             break ;
+    //         }
+    //     }
+    //     if (x == 1) {
+    //         arr.push([iteam.area, 1])
+    //     }
+    // })
 
+    let arr = dataChart.reduce((acc , iteam)=>{
+        if (acc.find(el => el[0] === iteam.area)) {
+            acc.find(el => el[0] === iteam.area)[1] += 1
+        }
+        else{
+            acc.push([iteam.area, 1]);
+        }
+         return acc
+    },[])
 
+     console.log(arr)
+     c3.generate({
+        bindto: '#dountChart',
+        size: {
+            width: 160,
+            height: 180
+        },
+        data: {
+            columns: arr,
+            type: 'donut',
+        },
+        donut: {
+            title: "套票地區比重",
+            width: 17,
+            label: {
+                show: false
+            }
+        }
+    });
+}
