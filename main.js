@@ -45,7 +45,6 @@ const regionSearch = document.querySelector(".regionSearch"),
       ticketCardArea = document.querySelector(".ticketCard-area"),
       addTicketForm = document.querySelector(".addTicket-form"),
       searchResultText = document.querySelector("#searchResult-text")
-let   dataChart 
          
 //data init
 function dataInit() {
@@ -80,8 +79,7 @@ function dataInit() {
           </div>
         </li>`
     })
-    dataChart = data
-    dountChart(dataChart)
+    dountChart(data)
 }
 
 //新增資料
@@ -125,7 +123,7 @@ regionSearch.addEventListener("change", event => {
 
 
 //新增圖表
-function dountChart(dataChart){
+function dountChart(data){
     
     // let arr = []
     // dataChart.forEach((iteam)=>{
@@ -142,7 +140,7 @@ function dountChart(dataChart){
     //     }
     // })
 
-    let arr = dataChart.reduce((acc , iteam)=>{
+    let arr = data.reduce((acc , iteam)=>{
         if (acc.find(el => el[0] === iteam.area)) {
             acc.find(el => el[0] === iteam.area)[1] += 1
         }
