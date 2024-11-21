@@ -156,7 +156,7 @@ function dountChart(dataChart){
      c3.generate({
         bindto: '#dountChart',
         size: {
-            width: 160,
+            width: 170,
             height: 180
         },
         data: {
